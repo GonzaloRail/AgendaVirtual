@@ -1,0 +1,17 @@
+<!-- enviar_mensaje.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enviar Mensaje de WhatsApp</title>
+</head>
+<body>
+    <h1>Enviar Mensaje de WhatsApp</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="mensaje">Mensaje:</label><br>
+        <textarea id="mensaje" name="mensaje" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
