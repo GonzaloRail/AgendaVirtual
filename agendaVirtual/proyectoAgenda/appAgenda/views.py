@@ -1,13 +1,9 @@
+
 # views.py
 from django.shortcuts import render
-import webbrowser
-import pyautogui
-import time
-
-import pywhatkit
-
+import webbrowser, time, pyautogui
 from appAgenda.models import Contacto
-from .forms import ContactoForm  # Importa el formulario desde forms.py
+from .forms import ContactoForm
 
 
 def enviar_mensaje_whatsapp(request):
@@ -22,18 +18,16 @@ def enviar_mensaje_whatsapp(request):
             # Crea la URL directa de WhatsApp para el contacto
             url_whatsapp = f"https://web.whatsapp.com/send?phone=+51{contacto.numero_telefono}"  # Ajusta el prefijo del código de país según tus necesidades
 
-            pywhatkit.sendwhatmsg(f"+51{contacto.numero_telefono}",mensaje)
-
             # Abre la URL directa de WhatsApp en el navegador predeterminado
-            #webbrowser.open(url_whatsapp)
+            webbrowser.open(url_whatsapp)
 
             # Espera hasta que WhatsApp Web se cargue completamente (ajusta el tiempo según tu conexión)
-            #time.sleep(15)
+            time.sleep(10)
 
             # Escribe y envía el mensaje
-            #pyautogui.write(mensaje)
-            #pyautogui.press('enter')
-            #time.sleep(1)
+            pyautogui.write(mensaje)
+            pyautogui.press('enter')
+            time.sleep(1)
 
         # Pasar los contactos y el mensaje al contexto
         context = {
@@ -44,7 +38,6 @@ def enviar_mensaje_whatsapp(request):
         return render(request, 'enviar_mensaje.html', context)
 
     return render(request, 'enviar_mensaje.html')
-
 
 
 def agregar_contacto(request):
